@@ -51,4 +51,27 @@ describe("Thermostat", function() {
       expect(thermostat._temp).toEqual(20);
     });
   });
+  describe('#energy_usage', function() {
+    it("it returns low-usage when temp <18", function() {
+      for(var i = 0; i < 4; i++) {
+        thermostat.down();
+      };
+      expect(thermostat.energy_usage()).toEqual('low-usage')
+    });
+    it("it returns medium-usage when temp >=18 and <25", function() {
+      thermostat.down();
+      thermostat.down();
+      expect(thermostat.energy_usage()).toEqual('medium-usage')
+      for(var i = 0; i < 6; i++) {
+        thermostat.up();
+      };
+      expect(thermostat.energy_usage()).toEqual('medium-usage')
+    });
+    it("it returns high-usage when temp >=25", function() {
+      for(var i = 0; i < 5; i++) {
+        thermostat.up();
+      };
+      expect(thermostat.energy_usage()).toEqual('high-usage')
+    });
+  });
 });

@@ -6,6 +6,16 @@ function Thermostat() {
   this._power_saving_mode = true;
 }
 
+Thermostat.prototype.energy_usage = function() {
+  if(this._temp < 18) {
+    return 'low-usage';
+  } else if(this._temp >= 18 && this._temp < 25) {
+    return 'medium-usage';
+  } else {
+    return 'high-usage';
+  };
+};
+
 Thermostat.prototype.power_saving_button = function() {
   if(this._power_saving_mode == true) {
     this._power_saving_mode = false;
