@@ -19,7 +19,7 @@ describe("Thermostat", function() {
       expect(thermostat.current_temp()).toEqual(19);
     });
     it("The minimum temperature is 10 degrees", function() {
-      expect(thermostat._min_temp).toEqual(10);
+      expect(thermostat.MINIMUM_TEMPERATURE).toEqual(10);
     });
   });
 
@@ -51,6 +51,7 @@ describe("Thermostat", function() {
       expect(thermostat._temp).toEqual(20);
     });
   });
+
   describe('#energy_usage', function() {
     it("it returns low-usage when temp <18", function() {
       for(var i = 0; i < 4; i++) {
@@ -72,6 +73,31 @@ describe("Thermostat", function() {
         thermostat.up();
       };
       expect(thermostat.energy_usage()).toEqual('high-usage')
+    });
+  });
+
+  describe('#isMinimumTemperature', function() {
+    it("will only go as low as 10", function() {
+      for(var i = 0; i < 11; i++) {
+        thermostat.down();
+      };
+      expect(thermostat.current_temp()).toEqual(10)
+    });
+  });
+
+  describe('#isMaximumTemperature', function() {
+    it("will only go as high as 25 in power saving mode", function() {
+      for(var i = 0; i < 10; i++) {
+        thermostat.up();
+      };
+      expect(thermostat.current_temp()).toEqual(25)
+    });
+    it("will only go as high as 32 in non power saving mode", function() {
+      thermostat.power_saving_button()
+      for(var i = 0; i < 15; i++) {
+        thermostat.up();
+      };
+      expect(thermostat.current_temp()).toEqual(32)
     });
   });
 });

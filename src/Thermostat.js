@@ -1,7 +1,7 @@
 'use strict';
 function Thermostat() {
 
-  this._min_temp = 10;
+  this.MINIMUM_TEMPERATURE = 10;
   this._temp = 20;
   this._power_saving_mode = true;
 }
@@ -37,15 +37,29 @@ Thermostat.prototype.current_temp = function() {
 };
 
 Thermostat.prototype.up = function() {
-  ++this._temp
+  if(this.isMaximumTemperature()) {
+    return;
+  };
+  ++this._temp;
   //return this.temp;
 };
 
 Thermostat.prototype.down = function() {
-  --this._temp
+  if(this.isMinimumTemperature()) {
+    return;
+  };
+  --this._temp;
   //return this.temp;
 };
 
-Thermostat.prototype.reset= function() {
+Thermostat.prototype.reset = function() {
   this._temp = 20;
+};
+
+Thermostat.prototype.isMinimumTemperature = function() {
+  return this._temp === this.MINIMUM_TEMPERATURE;
+};
+
+Thermostat.prototype.isMaximumTemperature = function() {
+    return this._temp === this.max_temp()
 };
