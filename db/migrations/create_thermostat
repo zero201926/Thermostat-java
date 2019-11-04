@@ -1,0 +1,2 @@
+CREATE DATABASE thermostat;
+CREATE TABLE settings(temperature VARCHAR(10), psm VARCHAR(10));

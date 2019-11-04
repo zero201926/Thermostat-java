@@ -63,3 +63,4 @@ Thermostat.prototype.isMinimumTemperature = function() {
 Thermostat.prototype.isMaximumTemperature = function() {
     return this._temp === this.max_temp()
 };
+// Thermostat()
